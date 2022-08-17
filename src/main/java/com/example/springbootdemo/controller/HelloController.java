@@ -14,7 +14,8 @@ public class HelloController {
     public String printWelcome(Model model) {
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
-        messages.add("Here you can take a look at all Users");
+        messages.add("This is a CRUD project");
+        messages.add("Transferred to Spring Boot");
         model.addAttribute("messages", messages);
         return "index";
     }
