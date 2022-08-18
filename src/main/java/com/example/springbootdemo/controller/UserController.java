@@ -13,7 +13,6 @@ import java.util.List;
 
 @Controller
 public class UserController {
-
     private final UserService userService;
 
     @Autowired
@@ -21,12 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String viewUsers() {
-        return "redirect:/users";
-    }
-
-    @GetMapping("/users")
+    @GetMapping("/")
     public String getAllUsers(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
@@ -41,13 +35,13 @@ public class UserController {
     @PostMapping("/user-create")
     public String createUser(User user) {
         userService.saveUser(user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("/user-update/{id}")
@@ -59,7 +53,7 @@ public class UserController {
 
     @PostMapping("/user-update")
     public String updateUser(User user) {
-        userService.saveUser(user);
-        return "redirect:/users";
+        userService.updateUser(user.getFirstName(), user.getLastName(), user.getEmail(), user.getId());
+        return "redirect:/";
     }
 }
